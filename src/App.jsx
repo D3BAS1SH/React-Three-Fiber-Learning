@@ -5,9 +5,10 @@ const App = () => {
   return (
     <>
       <Canvas>
-        <mesh>
-          <boxGeometry args={[2,2,4]} />
-          <meshBasicMaterial color={"#f00"}/>
+        <directionalLight position={[0,0,2]}/>
+        <mesh position={[1.2,0,0]}>
+          <boxGeometry args={[2,2,2]} />
+          <meshStandardMaterial color={"#f00"}/>
         </mesh>
       </Canvas>
     </>
