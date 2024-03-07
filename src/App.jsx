@@ -49,6 +49,22 @@ const MyTorus = ({position,size,color,animateStatus = false}) => {
   </mesh>
 }
 
+const MyTorusKnot = ({position,size,color,animateStatus = false}) => {
+  const ref = useRef()
+  useFrame((state,delta)=>{
+    if(animateStatus){
+      ref.current.rotation.x+=delta
+      ref.current.rotation.y+=delta*1.5
+      ref.current.position.z = Math.sin(state.clock.elapsedTime)*1.5
+      console.log(state);
+    }
+  })
+  return <mesh position={position} ref={ref}>
+    <torusKnotGeometry args={size}/>
+    <meshStandardMaterial color={color} wireframe={true}/>
+  </mesh>
+}
+
 const App = () => {
   const [animate,setAnimate] = useState(false)
 
@@ -70,6 +86,8 @@ const App = () => {
         {/* <MyTorus size={[1.5,0.4,100,4]} position={[0,0,0]} color={'#d4f'}/>
         <MyTorus size={[1.5,0.4,100,4]} position={[0,0,-5]} color={'#fa8'}/>
         <MyTorus size={[1.5,0.4,100,4]} position={[0,0,2.5]} color={'#f33'}/> */}
+
+        <MyTorusKnot size={[0.5*2,0.1*3,1000,5000,3,3]} position={[0,0,0]} color={'red'}/>
       </Canvas>
     </>
   )
